@@ -9,10 +9,13 @@
 // @include http://music.douban.com/subject/*
 // ==/UserScript==
 
+/* global jQuery */
+'use strict';
 !(function(window) {
     var _onload = window.onload;
     window.onload = function() {
         _onload && _onload();
+        /*jshint -W020 */
         $ || ($ = jQuery);
         function make() {
             function getCk() {
@@ -33,7 +36,11 @@
             }
             var title = $('#wrapper h1 span').html();
             if (!title) {
-                alert('请在专辑页面运行')
+                alert('请在专辑页面运行');
+                return;
+            }
+            if ($('.song-item').length === 0) {
+                alert('此专辑没有可以添加到收藏的曲目');
                 return;
             }
             $.post('http://music.douban.com/j/songlist/create', { sl_title: title, ck:ck }, function(result) {
@@ -46,6 +53,7 @@
                 var elItems = $('.song-item');
                 for (var i = 0; i < elItems.length; i++) {
                     var songId = $(elItems[i]).attr('id');
+                    /*jshint -W083 */
                     $.ajax({
                         type: 'POST',
                         url: 'http://music.douban.com/j/songlist/addsong',
@@ -58,7 +66,7 @@
                     console.log('添加完成');
                     window.location.href = url;
                 }
-            })
+            });
         }
 
         if (!$('#wrapper h1 span').html()) {
@@ -67,7 +75,7 @@
         $('<button>自动生成豆瓣歌单</button><span id="douban-programme"></span>').appendTo('#wrapper h1').click(function(){
             make();
         });
-    }
+    };
  
 })(window);
 
