@@ -3,10 +3,11 @@
 // @namespace https://malash.me/
 // @author  Malash <i@malash.me>
 // @icon  http://img3.douban.com/favicon.ico
-// @version 1.1.0
+// @version 1.1.1
 // @description 豆瓣歌单自动生成脚本
 // @homepageURL https://github.com/malash/douban-programme
 // @include http://music.douban.com/subject/*
+// @grant none
 // ==/UserScript==
 
 /* global jQuery */
@@ -83,4 +84,3 @@
     };
  
 })(window);
-
