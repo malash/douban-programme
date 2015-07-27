@@ -3,7 +3,7 @@
 // @namespace https://malash.me/
 // @author  Malash <i@malash.me>
 // @icon  http://img3.douban.com/favicon.ico
-// @version 1.0.2
+// @version 1.1.0
 // @description 豆瓣歌单自动生成脚本
 // @homepageURL https://github.com/malash/douban-programme
 // @include http://music.douban.com/subject/*
@@ -51,21 +51,26 @@
                 var programmeID = parseInt(url.substring(url.lastIndexOf('/') + 1, url.length));
                 console.log('添加收藏:', programmeID);
                 var elItems = $('.song-item');
-                for (var i = 0; i < elItems.length; i++) {
-                    var songId = $(elItems[i]).attr('id');
-                    /*jshint -W083 */
+                function add(copyI) {
+                    var songId = $(elItems[copyI]).attr('id');
+                    $('#douban-programme').html('正在添加第' + (copyI + 1) + '首');
                     $.ajax({
                         type: 'POST',
                         url: 'http://music.douban.com/j/songlist/addsong',
                         data: { sl_id: programmeID, song_id: songId, ck: ck },
-                        async: false,
                         success: function(){
-                            console.log('添加歌曲', i, ':', songId);
+                            if (copyI + 1 < elItems.length) {
+                                setTimeout(function() {
+                                    add(copyI + 1);
+                                }, 0);
+                            } else {
+                                $('#douban-programme').html('添加完成');
+                                window.location.href = url;
+                            }
                         }
                     });
-                    console.log('添加完成');
-                    window.location.href = url;
                 }
+                add(0);
             });
         }
 
