@@ -6,9 +6,9 @@
 
 例如：
 
-专辑地址：[http://music.douban.com/subject/1418205/](http://music.douban.com/subject/1418205/)
+专辑地址：[http://music.douban.com/subject/1418205](http://music.douban.com/subject/1418205)
 
-生成的收藏：[http://music.douban.com/programme/4725196](http://music.douban.com/programme/4725196)
+生成的收藏：[http://music.douban.com/programme/5269888](http://music.douban.com/programme/5269888)
 
 ## 使用方法
 
