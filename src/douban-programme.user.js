@@ -13,9 +13,7 @@
 /* global jQuery */
 'use strict';
 !(function(window) {
-    var _onload = window.onload;
-    window.onload = function() {
-        _onload && _onload();
+    window.addEventListener('load', function() {
         /*jshint -W020 */
         $ || ($ = jQuery);
         function make() {
@@ -127,6 +125,6 @@
         $('<button id="douban-programme-btn">自动生成豆瓣歌单</button><span id="douban-programme"></span>').appendTo('#wrapper h1').click(function(){
             make();
         });
-    };
- 
+    });
+
 })(window);
