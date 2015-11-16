@@ -3,7 +3,7 @@
 // @namespace https://malash.me/
 // @author  Malash <i@malash.me>
 // @icon  http://img3.douban.com/favicon.ico
-// @version 1.3.0
+// @version 1.3.1
 // @description 豆瓣歌单自动生成脚本
 // @homepageURL https://github.com/malash/douban-programme
 // @include http://music.douban.com/subject/*
@@ -44,6 +44,9 @@
             }
             while (title.length > 20) {
                 title = prompt('原标题过长，请修改为20字以内', title);
+                if (!title || title.length === 0) {
+                    return;
+                }
             }
             $.post('http://music.douban.com/j/songlist/create', { sl_title: title, ck:ck }, function(result) {
                 if (result.r !== 'success') {
@@ -84,7 +87,7 @@
                                             xhr.open('POST', 'http://music.douban.com/j/songlist/upload_cover');
                                             xhr.send(formData);
                                             xhr.addEventListener('load', function() {
-                                                data = JSON.parse(this.responseText);
+                                                var data = JSON.parse(this.responseText);
                                                 if (data.r !== 'success') {
                                                     $('#douban-programme').html(data.msg);
                                                     window.location.href = url;
